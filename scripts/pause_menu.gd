@@ -69,11 +69,20 @@ func toggle_pause():
 		# Освобождаем мышь для взаимодействия с меню
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		resume_button.grab_focus()
+		# Приостанавливаем фоновую музыку при паузе
+		if AudioManager and AudioManager.music_player:
+			AudioManager.music_player.stream_paused = true
 	else:
 		# Захватываем мышь обратно для управления камерой
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		# Возобновляем фоновую музыку
+		if AudioManager and AudioManager.music_player:
+			AudioManager.music_player.stream_paused = false
 
 func _on_resume_button_pressed():
+	# Воспроизводим звук подтверждения
+	if AudioManager:
+		AudioManager.play_ui_confirm()
 	toggle_pause()
 
 func _on_settings_button_pressed():
@@ -81,11 +90,21 @@ func _on_settings_button_pressed():
 	back_button.grab_focus()
 
 func _on_main_menu_button_pressed():
+	# Воспроизводим звук подтверждения
+	if AudioManager:
+		AudioManager.play_ui_confirm()
+		# Останавливаем фоновую музыку при возврате в меню
+		AudioManager.stop_background_music()
 	# Снимаем паузу перед переходом
 	get_tree().paused = false
+	await get_tree().create_timer(0.2).timeout
 	get_tree().change_scene_to_file(MENU_SCENE_PATH)
 
 func _on_quit_button_pressed():
+	# Воспроизводим звук отмены
+	if AudioManager:
+		AudioManager.play_ui_cancel()
+	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()
 
 func _on_back_button_pressed():

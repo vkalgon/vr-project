@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://df4d2vl0vkf1t"
+path="res://.godot/imported/harpsichord_chime_positive.wav-b6cd4079f9bae88e8e5065f7a989c2c3.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Musical Effects/harpsichord_chime_positive.wav"
+dest_files=["res://.godot/imported/harpsichord_chime_positive.wav-b6cd4079f9bae88e8e5065f7a989c2c3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

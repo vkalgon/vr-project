@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvmruyawg8ds7"]
+[gd_scene load_steps=11 format=3 uid="uid://bvmruyawg8ds7"]
 
 [ext_resource type="Script" uid="uid://2liw8qndk8tw" path="res://scripts/pause_menu.gd" id="1_pause"]
 [ext_resource type="Texture2D" uid="uid://dyad5akeqacds" path="res://assets/UI/PNG/pause/bg.png" id="2_bg"]
+[ext_resource type="Script" uid="uid://dncb4bwivv5sp" path="res://scripts/texture_button_animation.gd" id="2_texture_btn_anim"]
+[ext_resource type="Script" uid="uid://fm2gpt5r6725" path="res://scripts/button_animation.gd" id="3_btn_anim"]
 [ext_resource type="Texture2D" uid="uid://d4bfkjuoysiam" path="res://assets/UI/PNG/pause/table.png" id="3_table"]
 [ext_resource type="Texture2D" uid="uid://0amiglphpk1s" path="res://assets/UI/PNG/pause/header.png" id="4_header"]
 [ext_resource type="Texture2D" uid="uid://c6wlgyaoooe32" path="res://assets/UI/PNG/btn/play.png" id="5_play"]
@@ -84,21 +86,25 @@ alignment = 1
 layout_mode = 2
 texture_normal = ExtResource("5_play")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("6_settings")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="MainMenuButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("7_menu")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("8_close")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="SettingsPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -176,3 +182,4 @@ text = "Включить полноэкранный режим"
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Назад"
+script = ExtResource("3_btn_anim")

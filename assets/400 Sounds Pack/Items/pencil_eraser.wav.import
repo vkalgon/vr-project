@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dqdu03fvbf5qv"
+path="res://.godot/imported/pencil_eraser.wav-44527a713e75ff40ee6d064960665791.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Items/pencil_eraser.wav"
+dest_files=["res://.godot/imported/pencil_eraser.wav-44527a713e75ff40ee6d064960665791.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

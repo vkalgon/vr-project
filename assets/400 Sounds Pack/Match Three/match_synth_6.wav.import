@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cm5fhxjjx1swn"
+path="res://.godot/imported/match_synth_6.wav-43e0d3c731dac932a2ad7f76736116cc.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Match Three/match_synth_6.wav"
+dest_files=["res://.godot/imported/match_synth_6.wav-43e0d3c731dac932a2ad7f76736116cc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -15,12 +15,19 @@ func _ready():
 	# Замораживаем физику, чтобы трава не падала
 	freeze = true
 	
+	# Уменьшаем модель травы в 3 раза
+	scale = Vector3(1.0/3.0, 1.0/3.0, 1.0/3.0)
+	
 	# Находим AnimationPlayer если он есть
 	animation_player = _find_animation_player(self)
 	
 	# Если есть AnimationPlayer, запускаем анимацию
 	if animation_player:
 		if animation_player.has_animation("Object_0"):
+			var anim = animation_player.get_animation("Object_0")
+			# Устанавливаем зацикливание анимации
+			if anim:
+				anim.loop_mode = Animation.LOOP_LINEAR
 			animation_player.play("Object_0")
 			# Применяем начальную скорость ветра
 			_update_animation_speed()

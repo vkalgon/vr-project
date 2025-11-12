@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxmutv2ra2eom"
+path="res://.godot/imported/ghost_long.wav-18cf28dd8886f839a54ab1356ed94298.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Other/ghost_long.wav"
+dest_files=["res://.godot/imported/ghost_long.wav-18cf28dd8886f839a54ab1356ed94298.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

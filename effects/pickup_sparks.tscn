@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=4 uid="uid://pickup_sparks_effect"]
+
+[ext_resource type="Script" path="res://scripts/one_shot_autofree.gd" id="1_autofree"]
+
+[sub_resource type="Curve" id="Curve_scale"]
+_data = {
+"points": PackedFloat32Array(0, 0, 0, 1, 0.5, 0, 1, 1, 0, 0)
+}
+
+[sub_resource type="Gradient" id="Gradient_color"]
+colors = PackedColorArray(1, 0.525, 1, 1, 0.8, 0.4, 1, 0.6, 0.4, 0.2, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparks"]
+shading_mode = 0
+billboard_mode = 1
+albedo_color = Color(1, 0.525, 1, 1)
+emission_enabled = true
+emission = Color(1, 0.525, 1, 1)
+emission_energy_multiplier = 2.0
+transparency = 1
+flags_transparent = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_sparks"]
+size = Vector2(0.15, 0.15)
+material = SubResource("StandardMaterial3D_sparks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sparks"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.5
+initial_velocity_max = 4.5
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 8.0
+tangential_accel_max = 12.0
+damping_min = 0.25
+damping_max = 0.35
+scale_min = 0.1
+scale_max = 0.2
+scale_over_velocity_min = 0.0
+scale_over_velocity_max = 0.0
+scale_curve = SubResource("Curve_scale")
+color_ramp = SubResource("Gradient_color")
+
+[node name="PickupSparks" type="Node3D"]
+script = ExtResource("1_autofree")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 60
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sparks")
+draw_pass_1 = SubResource("QuadMesh_sparks")

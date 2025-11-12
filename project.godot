@@ -15,6 +15,15 @@ run/main_scene="res://scenes/Menu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+GameState="*res://scripts/GameState.gd"
+GameSettings="*res://scripts/game_settings.gd"
+FXSpawn="*res://scripts/fx_spawn.gd"
+AudioManager="*res://scripts/audio_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,16 +32,9 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[autoload]
-
-XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
-GameState="*res://scripts/GameState.gd"
-GameSettings="*res://scripts/game_settings.gd"
-
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/create_nature_scenes_plugin/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/nature_placer_plugin/plugin.cfg")
 
 [filesystem]
 

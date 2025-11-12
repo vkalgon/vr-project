@@ -1,8 +1,8 @@
 extends Node3D
 
 @export var grass_scene: PackedScene      # сюда укажем scenes/Grass.tscn
-@export var count: int = 20               # сколько пучков
-@export var area_size: Vector2 = Vector2(12, 12)  # размер поля по XZ
+@export var count: int = 200              # сколько пучков (увеличено для карты 100x100)
+@export var area_size: Vector2 = Vector2(100, 100)  # размер поля по XZ
 @export var y: float = 0.0                # высота над полом
 
 func _ready():

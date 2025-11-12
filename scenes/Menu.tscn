@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmq518ae0ujep"]
+[gd_scene load_steps=11 format=3 uid="uid://bmq518ae0ujep"]
 
 [ext_resource type="Script" uid="uid://f6pk1cxdjw6k" path="res://scripts/menu.gd" id="1_menu"]
 [ext_resource type="Texture2D" uid="uid://c6gsghd5bk3co" path="res://assets/UI/PNG/menu/bg.png" id="2_bg"]
+[ext_resource type="Script" uid="uid://dncb4bwivv5sp" path="res://scripts/texture_button_animation.gd" id="2_texture_btn_anim"]
+[ext_resource type="Script" uid="uid://fm2gpt5r6725" path="res://scripts/button_animation.gd" id="3_btn_anim"]
 [ext_resource type="Texture2D" uid="uid://bfhe0admibmtr" path="res://assets/UI/PNG/menu/logo.png" id="3_logo"]
 [ext_resource type="Texture2D" uid="uid://c6wlgyaoooe32" path="res://assets/UI/PNG/btn/play.png" id="4_play"]
 [ext_resource type="Texture2D" uid="uid://38eq1pht6j7u" path="res://assets/UI/PNG/btn/settings.png" id="5_settings"]
@@ -66,26 +68,31 @@ alignment = 1
 layout_mode = 2
 texture_normal = ExtResource("4_play")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_settings")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="InventoryButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Инвентарь"
+script = ExtResource("3_btn_anim")
 
 [node name="StatsButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Статистика"
+script = ExtResource("3_btn_anim")
 
 [node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("6_close")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="SettingsPanel" type="Control" parent="."]
 visible = false
@@ -161,6 +168,7 @@ custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 texture_normal = ExtResource("6_close")
 stretch_mode = 5
+script = ExtResource("2_texture_btn_anim")
 
 [node name="InventoryPanel" type="Panel" parent="."]
 visible = false
@@ -202,6 +210,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Назад"
+script = ExtResource("3_btn_anim")
 
 [node name="StatsPanel" type="Panel" parent="."]
 visible = false
@@ -243,3 +252,4 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Назад"
+script = ExtResource("3_btn_anim")

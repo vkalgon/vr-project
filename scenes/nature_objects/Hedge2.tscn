@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=4 uid="uid://hmhvrsuewigp"]
+
+[ext_resource type="Script" uid="uid://dpoxwlaospikt" path="res://scripts/nature_object.gd" id="1_2aejb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0thlc"]
+resource_name = "Hedge"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.316994, 0.626662, 0.251384, 1)
+emission_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_30kki"]
+_surfaces = [{
+"aabb": AABB(-0.012679, -0.0179951, -0.00913597, 0.0249759, 0.0259231, 0.0183276),
+"format": 34359742465,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAQABQADAAEAAwAGAAIAAwAFAAYAAgAHAAQABwACAAYACAAAAAQABwAJAAQACQAIAAQABgAKAAcABwAKAAkACgAGAAUACwABAAAACwAAAAgADAAFAAEADAABAAsADQAKAAUADAANAAUADgAMAAsADAAOAA0ACwAIAA4ADQAPAAoACQAKAA8ADQAOABAAEAAOAAgADwANABAACQARAAgACQAPABEAEQAQAAgADwAQABEA"),
+"name": "Hedge",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("0/ZCvFznvbl4r5O7PTdru6nnErsNrxW8c4lLu8x/8zvcu1i7yLG3Osn3UTvTjOu7F1Lru2QVjTtgIJY7QPEFPMVOwbt8I5i7d0/qO+CArDsaPYy7eNYhO1zkATwuqoo7/3VNvEQ61Ltd7e874Zskul98jzmfmBY87XhJPLv3qDnaoZo7fLtPvCGfCrxjU9e7Fharu6NhYry0UOu7FDcwu2hqk7x9N7w6joYpvO3sgbyzeUS70yeDukQ3Vrwvd/g7D+QcvEWgcLyIues7yrFDvLTYFbyNNxE8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6nagr"]
+resource_name = "Icosphere_021"
+_surfaces = [{
+"aabb": AABB(-0.012679, -0.0179951, -0.00913597, 0.0249759, 0.0259231, 0.0183276),
+"attribute_data": PackedByteArray("NINAP5pBQD9mvn8/mkFAP2a+fz/MfH8/Zr4/P2gGAT5mvj8/MPN9PjSDAD9oBgE+mkEAP5j5fj7MfD8/mPl+PppBAD/QDAI+Zr4/P5pBAD80gwA/mkEAP2a+Pz/MfD8/mPl+Ppj5/j6Y+X4+NIOAPgU0Azs0g4A+mPl+PjDzfT4FNAM7ADSDOpj5fj4ANIM6Zr4/P5pBQD80gwA/mkFAP2a+Pz/MfH8/zHz/PppBAD/MfP8+zHw/P2gGgT6aQQA/zHz/Psx8fz9oBoE+mkFAP8x8/z6aQUA/NINAPzSDgD5mvl8/NIOAPma+Xz+Y+f4+NIMAPzSDgD5mvj8/NIOAPma+Pz+Y+f4+mPn+Pma+fz80g4A+Zr5/PzSDgD40g0A/mkFAP8x8/z7MfF8/zHz/PppBQD9oBoE+NIOAPma+Pz80g4A+NIMAP5j5/j5mvj8/zHz/PmgGAT5oBoE+aAYBPsx8/z4w830+Zr5fP8x8Pz9mvl8/mkEAPzSDQD+aQQA/aAaBPjSDgD7MfP8+mPn+Psx8/z40g4A+mkFAP2a+fz/MfH8/Zr5/P5pBQD80g0A/aAaBPgA0gzrMfP8+ADSDOsx8/z5g5vs9NIOAPgA0AzuY+f4+MPP9PTSDgD4w8/09MPN9Ppj5fj4FNIM6ADQDOwU0gzqY+X4+mPl+Psx8Pz+Y+X4+mkEAPwU0AzuaQQA/mkEAP2gGgT6aQQA/zHz/Psx8Pz/MfP8+NIOAPsx8/z40g4A+aAaBPpj5/j7MfP8+mPl+PppBQD+Y+X4+zHx/PwU0AzuaQUA/mkEAP2a+Pz/MfD8/Zr4/P5pBAD80gwA/mkEAP2a+fz/MfD8/Zr5/P5pBAD80g0A/MPN9Psx8/z4FNIM6aAaBPgU0gzrMfP8+mkFAPzSDAD+aQUA/Zr4/P8x8Xz9mvj8/mPn+Ppj5fj40g4A+0AwCPjSDgD6Y+X4+BTSDOjSDAD8w830+Zr4/PwU0gzpmvj8/MPN9Pma+fz8FNIM6NINAPwU0gzpmvn8/"),
+"format": 34359742487,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsAPAA9AD4APwBAAEEAQgBDAEQARQBGAEcASABJAEoASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAXQBeAF8A"),
+"material": SubResource("StandardMaterial3D_0thlc"),
+"name": "Hedge",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_30kki")
+
+[node name="Hedge2" type="MeshInstance3D"]
+transform = Transform3D(-36.984, -34.3878, 0.345256, -32.7579, 36.889, 12.5098, -7.71861, 8.21247, -54.7463, -8.87865, 0.188218, 11.8698)
+mesh = SubResource("ArrayMesh_6nagr")
+skeleton = NodePath("")
+script = ExtResource("1_2aejb")
+metadata/source_name = &"Hedge2"

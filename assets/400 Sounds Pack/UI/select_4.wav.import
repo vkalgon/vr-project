@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxgeoc6oev5ik"
+path="res://.godot/imported/select_4.wav-925948f7ca2ee7a2384201bda21c6711.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/UI/select_4.wav"
+dest_files=["res://.godot/imported/select_4.wav-925948f7ca2ee7a2384201bda21c6711.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

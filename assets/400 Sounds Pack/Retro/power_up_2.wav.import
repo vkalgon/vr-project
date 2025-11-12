@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2bgset3jvxfa"
+path="res://.godot/imported/power_up_2.wav-4847137c6ffb9cf0eec86f5b671159af.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Retro/power_up_2.wav"
+dest_files=["res://.godot/imported/power_up_2.wav-4847137c6ffb9cf0eec86f5b671159af.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

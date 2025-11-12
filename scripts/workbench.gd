@@ -4,6 +4,7 @@ extends Node3D
 @export var interaction_distance: float = 2.0  # максимальное расстояние для взаимодействия
 
 func _ready():
+	add_to_group("workbench")  # Добавляем в группу для поиска
 	if not use_zone: use_zone = $UseZone
 	# Подключаем сигналы зоны для отслеживания входа/выхода
 	if use_zone:
@@ -13,6 +14,9 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("interact"):
 		if _player_in_zone():
+			# Воспроизводим звук работы верстака
+			if AudioManager:
+				AudioManager.play_craft_work()
 			_try_craft()
 
 func _on_body_entered(body: Node3D):
@@ -120,6 +124,9 @@ func _try_craft():
 			print("Can craft! Paying cost: ", recipe.cost)
 			if GameState.pay(recipe.cost):
 				print("Cost paid successfully. New inv: ", GameState.inv)
+				# Воспроизводим звук успешного крафта
+				if AudioManager:
+					AudioManager.play_craft_success()
 				_spawn(recipe)
 				var success_msg: String = "Скрафчено: %s" % recipe.name
 				if recipe.glyph_hint != "":
@@ -139,8 +146,14 @@ func _try_craft():
 	if first_recipe_missing.size() > 0:
 		var error_msg: String = "Недостаточно ингредиентов для '%s':\n" % first_recipe_name
 		error_msg += "\n".join(first_recipe_missing)
+		# Воспроизводим звук ошибки крафта
+		if AudioManager:
+			AudioManager.play_craft_fail()
 		_show_message(error_msg, false)
 	else:
+		# Воспроизводим звук ошибки крафта
+		if AudioManager:
+			AudioManager.play_craft_fail()
 		_show_message("Недостаточно ресурсов для любого рецепта", false)
 
 func _spawn(r: Recipe):

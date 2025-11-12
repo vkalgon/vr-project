@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dpg1441326fww"
+path="res://.godot/imported/coin_4.wav-73a669d3aa3de4eded6f36d241eedffc.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Retro/coin_4.wav"
+dest_files=["res://.godot/imported/coin_4.wav-73a669d3aa3de4eded6f36d241eedffc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxqrdi3xlt0w5"
+path="res://.godot/imported/door_open.wav-23386961aad949915d00bcd7d2f2db7d.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Environment/door_open.wav"
+dest_files=["res://.godot/imported/door_open.wav-23386961aad949915d00bcd7d2f2db7d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

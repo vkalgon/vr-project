@@ -1,0 +1,243 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5k4m3n2p1q0r"]
+
+[ext_resource type="Script" path="res://addons/nature_placer_plugin/dock_script.gd" id="1_dock"]
+
+[node name="NaturePlacerDock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_minimum_size = Vector2(300, 0)
+script = ExtResource("1_dock")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Nature Object Placer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MapSizeLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Map Size:"
+
+[node name="MapSizeX" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 100.0
+suffix = " X"
+
+[node name="MapSizeZ" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 100.0
+suffix = " Z"
+
+[node name="MinDistance" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 100.0
+value = 0.2
+suffix = " Min Distance"
+
+[node name="MinDistanceFromWorkbench" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 100.0
+value = 3.0
+suffix = " Min Distance From Workbench"
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CountsLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Object Counts:"
+
+[node name="TreeCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 150.0
+suffix = " Trees"
+
+[node name="RockCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 200.0
+suffix = " Rocks"
+
+[node name="MushroomCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 250.0
+suffix = " Mushrooms"
+
+[node name="GrassCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 1000.0
+suffix = " Grass"
+
+[node name="StructureCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 50.0
+suffix = " Structures"
+
+[node name="DecorationCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 100.0
+suffix = " Decorations"
+
+[node name="EffectCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 20.0
+suffix = " Effects"
+
+[node name="ToolCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 10.0
+suffix = " Tools"
+
+[node name="OtherCount" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10000.0
+value = 30.0
+suffix = " Other"
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScalesLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Object Scales:"
+
+[node name="TreeScaleX" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Tree Scale X"
+
+[node name="TreeScaleY" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Tree Scale Y"
+
+[node name="TreeScaleZ" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Tree Scale Z"
+
+[node name="RockScaleX" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Rock Scale X"
+
+[node name="RockScaleY" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Rock Scale Y"
+
+[node name="RockScaleZ" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Rock Scale Z"
+
+[node name="MushroomScaleX" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Mushroom Scale X"
+
+[node name="MushroomScaleY" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Mushroom Scale Y"
+
+[node name="MushroomScaleZ" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Mushroom Scale Z"
+
+[node name="GrassScaleX" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Grass Scale X"
+
+[node name="GrassScaleY" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Grass Scale Y"
+
+[node name="GrassScaleZ" type="SpinBox" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 1000.0
+value = 1.0
+suffix = " Grass Scale Z"
+
+[node name="HSeparator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlaceButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Place Objects"
+
+[node name="ClearButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Clear All"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://0bt5jyw2m8r"]
+[gd_scene load_steps=4 format=3 uid="uid://0bt5jyw2m8r"]
 
 [ext_resource type="Script" uid="uid://3fjl2aalqqkk" path="res://scripts/game_hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" uid="uid://defes8gvj5sg1" path="res://assets/UI/PNG/bubble/table.png" id="2_table"]
+[ext_resource type="PackedScene" uid="uid://b8k3m2n4p5q6r" path="res://scenes/ObjectTypePanel.tscn" id="3_type_panel"]
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -84,3 +85,6 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="ObjectTypePanel" parent="." instance=ExtResource("3_type_panel")]
+layout_mode = 1

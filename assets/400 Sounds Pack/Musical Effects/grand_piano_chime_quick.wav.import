@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://calym8e2qr6mu"
+path="res://.godot/imported/grand_piano_chime_quick.wav-ec61a9a6ae1af9998d329d197fb55188.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Musical Effects/grand_piano_chime_quick.wav"
+dest_files=["res://.godot/imported/grand_piano_chime_quick.wav-ec61a9a6ae1af9998d329d197fb55188.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

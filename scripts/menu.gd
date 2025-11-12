@@ -43,6 +43,11 @@ func _input(event: InputEvent):
 			_on_back_button_pressed()
 
 func _on_start_button_pressed():
+	# Воспроизводим звук подтверждения
+	if AudioManager:
+		AudioManager.play_ui_confirm()
+	# Небольшая задержка для звука перед переходом
+	await get_tree().create_timer(0.2).timeout
 	# Загружаем главную сцену игры
 	get_tree().change_scene_to_file(MAIN_SCENE_PATH)
 

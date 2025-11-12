@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=4 uid="uid://bmjcxm164ofpi"]
+
+[ext_resource type="Script" uid="uid://dpoxwlaospikt" path="res://scripts/nature_object.gd" id="1_7d4ua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80dmw"]
+resource_name = "Ruins1_2"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.454873, 0.490176, 0.519996, 1)
+emission_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b055c"]
+_surfaces = [{
+"aabb": AABB(-0.00703429, -0.00655015, -0.00622312, 0.0142652, 0.0129886, 0.016425),
+"format": 34359742465,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAEAAgALAAMADAABAAMABQAMAAMAAwALAAUAAQAMAAQABAANAAEADAAFAA4ADAAOAAQABQALAAgACAAOAAUACwAKAAgABgAEAA4ABAAGAA0ADgAIAAYAAQANAAcADQAGAAcAAgABAAcABgAIAA8ACAAKAA8ABgAPAAcACQAPAAoABwAPAAkAAgAHAAkACQAKAAsACQALAAIA"),
+"lods": [0.00231918, PackedByteArray("AAABAAIAAAADAAEAAAACAAMAAQADAAQAAgAFAAMAAwAFAAQABAAGAAEABgAEAAUAAQAGAAcAAgABAAcABQAIAAYABgAIAAcACQAFAAIAAgAHAAkABQAKAAgACAAKAAcACQAKAAUACQAHAAoA")],
+"name": "Ruins1_2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("6H/mu50byjvugsu78XGLO2AGyTvYw8u75Oe8u5z50ju+4RC7Kebku3+yzruqw8u7r4GLO8+xzrtO68u7FTKIu2/vv7vFUb8643XlO+grzbsfwa45bvHsO+PuxzuY0ZE5GlxHuqNFz7sUaCU8aIVTuzEKxztsCGA7L7U/um/U0DvfJSc89viLu1ErITr836U6D9qQupqi1rvu1cu7fCTJO+1RKbv+xh+7BiuYOvGJz7s9DSa57mhBO9Sgyjta7qk7")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ash80"]
+resource_name = "Cube_027"
+_surfaces = [{
+"aabb": AABB(-0.00703429, -0.00655015, -0.00622312, 0.0142652, 0.0129886, 0.016425),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD/eSlI/YhCfPp1NLj8eo6I+N8EtP/hnmz4gTFI/iGebPjpMUj+kT6Q+US1SP+wKqj6zyi0/8PqpPp6zLT8EmeQ+kLotP/741T4gSVI/8JbkPkw7Uj8aItY+AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAP1kWQz9CIaI+AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/Vm85P7ZM2z43wS0/+GebPlkWQz9CIaI+WRZDP0Ihoj7eSlI/YhCfPlZvOT+2TNs+kLotP/741T5ZFkM/QiGiPt5KUj9iEJ8+N8EtP/hnmz6esy0/BJnkPlZvOT+2TNs+nU0uPx6joj5ZFkM/QiGiPrPKLT/w+qk+IElSP/CW5D5Wbzk/tkzbPkw7Uj8aItY+OkxSP6RPpD5RLVI/7AqqPlkWQz9CIaI+"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAIQAiAAMABgAHAAgAIwAkAAsADgAlABAAEgAmABQAJwAoACkAEQAPACoAKwATACwACgAtAAkALgAvAAQAMAAVADEAMgAzADQAFgA1ABgANgANAAwANwA4ADkAOgA7ADwAPQA+AAUAHQAeAD8AQABBABcAGgBCAEMARABFACAARgAbABwAGQBHAEgASQBKAB8ASwBMAE0ATgBPAFAAUQBSAFMA"),
+"lods": [0.00231918, PackedByteArray("AAABAAIAAgABAAMABAADAAUABgAHAAgACQAKAAsADAALAAoACgANAAwADgAPABAAEQAPAA4AEgATABQAEwAVABQAFgAXABgAGQAWABgAGgAXABYAGgAbABcAFwAbABwAHQAeAB8AHwAeACAA")],
+"material": SubResource("StandardMaterial3D_80dmw"),
+"name": "Ruins1_2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("6H/mu50byjvugsu78XGLO2AGyTvYw8u75Oe8u5z50ju+4RC7bvHsO+PuxzuY0ZE5aIVTuzEKxztsCGA7L7U/um/U0DvfJSc85Oe8u5z50ju+4RC7bvHsO+PuxzuY0ZE5aIVTuzEKxztsCGA7Kebku3+yzruqw8u7FTKIu2/vv7vFUb86r4GLO8+xzrtO68u743XlO+grzbsfwa45GlxHuqNFz7sUaCU88XGLO2AGyTvYw8u7Kebku3+yzruqw8u7r4GLO8+xzrtO68u76H/mu50byjvugsu743XlO+grzbsfwa45GlxHuqNFz7sUaCU8bvHsO+PuxzuY0ZE5L7U/um/U0DvfJSc85Oe8u5z50ju+4RC7FTKIu2/vv7vFUb86Kebku3+yzruqw8u76H/mu50byjvugsu7aIVTuzEKxztsCGA7L7U/um/U0DvfJSc8GlxHuqNFz7sUaCU8r4GLO8+xzrtO68u743XlO+grzbsfwa458XGLO2AGyTvYw8u7bvHsO+PuxzuY0ZE55Oe8u5z50ju+4RC78XGLO2AGyTvYw8u7D9qQupqi1rvu1cu7BiuYOvGJz7s9DSa5D9qQupqi1rvu1cu77mhBO9Sgyjta7qk7GlxHuqNFz7sUaCU8BiuYOvGJz7s9DSa5FTKIu2/vv7vFUb868XGLO2AGyTvYw8u743XlO+grzbsfwa457mhBO9Sgyjta7qk7D9qQupqi1rvu1cu7bvHsO+PuxzuY0ZE57mhBO9Sgyjta7qk7GlxHuqNFz7sUaCU87mhBO9Sgyjta7qk7D9qQupqi1rvu1cu78XGLO2AGyTvYw8u7Kebku3+yzruqw8u79viLu1ErITr836U6BiuYOvGJz7s9DSa5D9qQupqi1rvu1cu7FTKIu2/vv7vFUb86BiuYOvGJz7s9DSa543XlO+grzbsfwa45r4GLO8+xzrtO68u7BiuYOvGJz7s9DSa5aIVTuzEKxztsCGA77mhBO9Sgyjta7qk7fCTJO+1RKbv+xh+7Kebku3+yzruqw8u79viLu1ErITr836U69viLu1ErITr836U65Oe8u5z50ju+4RC7fCTJO+1RKbv+xh+743XlO+grzbsfwa459viLu1ErITr836U65Oe8u5z50ju+4RC7Kebku3+yzruqw8u7r4GLO8+xzrtO68u7fCTJO+1RKbv+xh+7FTKIu2/vv7vFUb869viLu1ErITr836U6GlxHuqNFz7sUaCU88XGLO2AGyTvYw8u7fCTJO+1RKbv+xh+7bvHsO+PuxzuY0ZE5aIVTuzEKxztsCGA7L7U/um/U0DvfJSc89viLu1ErITr836U6iIim/////7+IiKb/////v4iIpv////+/S4Sd/P///7+Ie7f+////vyx6S/////+/xIFO9////z/EgU73////P8SBTvf///8/RXszDf///z9FezMN////P2+Fswf///8/hoHpAf///z+GgekB////PwwA7v////+/FADo/////78MAO7/////vxQA6P////+/1cMCf////z+vxhaB////P9XDAn////8/b8lgf////z9cJal9mXs8/vMiXn+IgQz8XCWpfZl7PP4oH5l/gX+z/5woJYGje+D/biTnfwKAz/9uJOd/AoDP/yf5blXCj+/9J/luVcKP7/33/4eq9n/4/xz+O16Ygo3+S4Sd/P///79LhJ38////v2+Fswf///8/b4WzB////z8MAO7/////v9XDAn////8/JHPnCv///78kc+cK////vyRz5wr///+/FADo/////7+vxhaB////P6/GFoH///8/RXszDf///z+Ie7f+////v4h7t/7///+/b8lgf////z9vyWB/////PwoA8/////+/CgDz/////78KAPP/////v1wlqX2Zezz+hoHpAf///z8DeAAP////PwN4AA////8/A3gAD////z+JgcoB////P4mBygH///8/iYHKAf///z8sekv/////vyx6S/////+/J/luVcKP7/3zIl5/iIEM/PMiXn+IgQz8nCglgaN74P+cKCWBo3vg/xz+O16Ygo3+HP47XpiCjf5uJOd/AoDP/ygfmX+Bf7P/KB+Zf4F/s//3/4eq9n/4//f/h6r2f/j/gCRyfzGCM/uAJHJ/MYIz+4Akcn8xgjP7fP48qWiABv18/jypaIAG/Xz+PKlogAb9ZyVAhGWL+P5nJUCEZYv4/mclQIRli/j+")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b055c")
+
+[node name="Ruins4" type="MeshInstance3D"]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 13.4619, 1.20856, 9.23126)
+mesh = SubResource("ArrayMesh_ash80")
+skeleton = NodePath("")
+script = ExtResource("1_7d4ua")
+metadata/source_name = &"Ruins4"

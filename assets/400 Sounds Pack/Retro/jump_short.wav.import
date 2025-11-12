@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckvdk57h2h6hu"
+path="res://.godot/imported/jump_short.wav-d6d89342a639c0e7c8663644df868f1c.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Retro/jump_short.wav"
+dest_files=["res://.godot/imported/jump_short.wav-d6d89342a639c0e7c8663644df868f1c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

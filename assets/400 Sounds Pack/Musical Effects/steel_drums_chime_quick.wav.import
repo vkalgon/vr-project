@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxhcme6bbelr1"
+path="res://.godot/imported/steel_drums_chime_quick.wav-d9f9df1448248e000e0fc2d5f7616e7c.sample"
+
+[deps]
+
+source_file="res://assets/400 Sounds Pack/Musical Effects/steel_drums_chime_quick.wav"
+dest_files=["res://.godot/imported/steel_drums_chime_quick.wav-d9f9df1448248e000e0fc2d5f7616e7c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

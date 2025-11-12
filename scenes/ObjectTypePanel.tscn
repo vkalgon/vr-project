@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8k3m2n4p5q6r"]
+
+[ext_resource type="Script" uid="uid://curxqfwddc1v4" path="res://scripts/object_type_panel.gd" id="1_panel"]
+[ext_resource type="Script" uid="uid://fm2gpt5r6725" path="res://scripts/button_animation.gd" id="2_btn_anim"]
+
+[node name="ObjectTypePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ObjectNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Объект: "
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TreeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Дерево"
+script = ExtResource("2_btn_anim")
+
+[node name="RockButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Камень"
+script = ExtResource("2_btn_anim")
+
+[node name="MushroomButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Гриб"
+script = ExtResource("2_btn_anim")
+
+[node name="GrassButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Трава"
+script = ExtResource("2_btn_anim")
+
+[node name="StructureButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Строение"
+script = ExtResource("2_btn_anim")
+
+[node name="DecorationButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Декор"
+script = ExtResource("2_btn_anim")
+
+[node name="EffectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Эффект"
+script = ExtResource("2_btn_anim")
+
+[node name="ToolButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Инструмент"
+script = ExtResource("2_btn_anim")
+
+[node name="OtherButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Другое"
+script = ExtResource("2_btn_anim")
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Закрыть (Esc)"
+script = ExtResource("2_btn_anim")
