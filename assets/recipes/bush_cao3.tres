@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=3 format=3 uid="uid://e7r3d0v62wvc"]
+
+[ext_resource type="PackedScene" uid="uid://dcacdgqt5vlat" path="res://scenes/Bush.tscn" id="1_tjr84"]
+[ext_resource type="Script" uid="uid://mykjftg0dap7" path="res://scripts/Recipe.gd" id="2_snbfa"]
+
+[resource]
+script = ExtResource("2_snbfa")
+name = "Куст"
+glyph_hint = "草 (игровая комбинация)\""
+cost = {}
+out_scene = ExtResource("1_tjr84")
