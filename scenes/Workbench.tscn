@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://uklknt6m0puo"]
+
+[ext_resource type="PackedScene" uid="uid://bg2rc6024bwlm" path="res://assets/workbench/fantasy_stylized_workbench/scene.gltf" id="1_1cdeh"]
+[ext_resource type="Script" uid="uid://dervetm0vy8hx" path="res://scripts/workbench.gd" id="2_p3ame"]
+[ext_resource type="Script" uid="uid://mykjftg0dap7" path="res://scripts/Recipe.gd" id="3_cc3pl"]
+[ext_resource type="PackedScene" uid="uid://dcacdgqt5vlat" path="res://scenes/Bush.tscn" id="4_n2n0h"]
+
+[sub_resource type="Resource" id="Resource_a0vkv"]
+script = ExtResource("3_cc3pl")
+name = "Куст"
+glyph_hint = "草 (игровая комбинация)"
+cost = {}
+out_scene = ExtResource("4_n2n0h")
+metadata/_custom_type_script = "uid://mykjftg0dap7"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1cdeh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3ame"]
+size = Vector3(0.271851, 0.251709, 0.167847)
+
+[node name="Workbench" node_paths=PackedStringArray("use_zone") instance=ExtResource("1_1cdeh")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
+script = ExtResource("2_p3ame")
+use_zone = NodePath("UseZone")
+recipes = Array[ExtResource("3_cc3pl")]([SubResource("Resource_a0vkv")])
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(0.155, 0, 0, 0, 0.185, 0, 0, 0, 0.1, 0, 0.0884268, -0.0106302)
+shape = SubResource("BoxShape3D_1cdeh")
+
+[node name="UseZone" type="Area3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UseZone" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110474, 0.104126, -0.027771)
+shape = SubResource("BoxShape3D_p3ame")

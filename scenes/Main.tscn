@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://ci1xcucj7ei3j"]
+
+[ext_resource type="PackedScene" uid="uid://cfp8t1jsjlygj" path="res://scenes/Grass.tscn" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://dv7e1w5a3kfwy" path="res://scripts/grass_spawner.gd" id="2_rvslj"]
+[ext_resource type="Script" uid="uid://byrmt0bk0rb26" path="res://scripts/desktop_camera.gd" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://uklknt6m0puo" path="res://scenes/Workbench.tscn" id="4_rarhs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0bbpv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rarhs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0bbpv"]
+
+[node name="Main_tscn" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_elqb8")]
+
+[node name="GrassSpawner" type="Node3D" parent="."]
+script = ExtResource("2_rvslj")
+grass_scene = ExtResource("1_elqb8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+script = ExtResource("3_0bbpv")
+
+[node name="GrabZone" type="Area3D" parent="Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/GrabZone"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_0bbpv")
+debug_color = Color(0.267938, 0.584558, 0.670649, 0.42)
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(10000, 0, 0, 0, 0.5, 0, 0, 0, 10000, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_rarhs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(100, 0, 0, 0, 0.5, 0, 0, 0, 100, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_0bbpv")
+skeleton = NodePath("../..")
+
+[node name="Workbench" parent="." instance=ExtResource("4_rarhs")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -3.10939)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.206494, 0.978448, 0, -0.978448, 0.206494, 0, 16.0288, 0)
