@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci1xcucj7ei3j"]
+[gd_scene load_steps=11 format=3 uid="uid://ci1xcucj7ei3j"]
 
 [ext_resource type="PackedScene" uid="uid://cfp8t1jsjlygj" path="res://scenes/Grass.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://dv7e1w5a3kfwy" path="res://scripts/grass_spawner.gd" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://byrmt0bk0rb26" path="res://scripts/desktop_camera.gd" id="3_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://uklknt6m0puo" path="res://scenes/Workbench.tscn" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://bvmruyawg8ds7" path="res://scenes/PauseMenu.tscn" id="5_pause"]
+[ext_resource type="PackedScene" uid="uid://0bt5jyw2m8r" path="res://scenes/GameHUD.tscn" id="6_hud"]
+[ext_resource type="Script" uid="uid://crclp0blgyx8d" path="res://scripts/wind_controller.gd" id="7_wind"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0bbpv"]
 
@@ -48,3 +51,11 @@ transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -3.10939)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.206494, 0.978448, 0, -0.978448, 0.206494, 0, 16.0288, 0)
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]
+process_mode = 0
+
+[node name="GameHUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="WindController" type="Node3D" parent="."]
+script = ExtResource("7_wind")

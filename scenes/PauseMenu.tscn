@@ -1,0 +1,178 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvmruyawg8ds7"]
+
+[ext_resource type="Script" uid="uid://2liw8qndk8tw" path="res://scripts/pause_menu.gd" id="1_pause"]
+[ext_resource type="Texture2D" uid="uid://dyad5akeqacds" path="res://assets/UI/PNG/pause/bg.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://d4bfkjuoysiam" path="res://assets/UI/PNG/pause/table.png" id="3_table"]
+[ext_resource type="Texture2D" uid="uid://0amiglphpk1s" path="res://assets/UI/PNG/pause/header.png" id="4_header"]
+[ext_resource type="Texture2D" uid="uid://c6wlgyaoooe32" path="res://assets/UI/PNG/btn/play.png" id="5_play"]
+[ext_resource type="Texture2D" uid="uid://38eq1pht6j7u" path="res://assets/UI/PNG/btn/settings.png" id="6_settings"]
+[ext_resource type="Texture2D" uid="uid://rou51cth2cae" path="res://assets/UI/PNG/btn/menu.png" id="7_menu"]
+[ext_resource type="Texture2D" uid="uid://8m4l23vsjsp3" path="res://assets/UI/PNG/btn/close.png" id="8_close"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pause")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PauseTable" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -624.0
+offset_top = -411.0
+offset_right = 621.0
+offset_bottom = 411.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_table")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PauseHeader" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -297.0
+offset_right = 242.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_header")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.656
+anchor_top = 0.866
+anchor_right = 0.656
+anchor_bottom = 0.866
+offset_left = -1251.52
+offset_top = -560.28
+offset_right = 667.48
+offset_bottom = -237.28
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="ResumeButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_play")
+stretch_mode = 5
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_settings")
+stretch_mode = 5
+
+[node name="MainMenuButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_menu")
+stretch_mode = 5
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_close")
+stretch_mode = 5
+
+[node name="SettingsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Настройки"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Скорость движения: 5.0"
+horizontal_alignment = 1
+
+[node name="SpeedSlider" type="HSlider" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+step = 0.5
+value = 5.0
+
+[node name="SensitivityLabel" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Чувствительность мыши: 0.002"
+horizontal_alignment = 1
+
+[node name="SensitivitySlider" type="HSlider" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.001
+max_value = 0.01
+step = 0.0005
+value = 0.002
+
+[node name="VSyncLabel" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "VSync"
+horizontal_alignment = 1
+
+[node name="VSyncCheckBox" type="CheckBox" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Включить VSync"
+
+[node name="FullscreenLabel" type="Label" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Полноэкранный режим"
+horizontal_alignment = 1
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Включить полноэкранный режим"
+
+[node name="BackButton" type="Button" parent="SettingsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Назад"

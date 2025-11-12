@@ -6,6 +6,8 @@
 [resource]
 script = ExtResource("2_snbfa")
 name = "Куст"
-glyph_hint = "草 (игровая комбинация)\""
-cost = {}
+glyph_hint = "草 (игровая комбинация)"
+cost = {
+"cao": 3
+}
 out_scene = ExtResource("1_tjr84")

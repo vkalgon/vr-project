@@ -9,7 +9,9 @@
 script = ExtResource("3_cc3pl")
 name = "Куст"
 glyph_hint = "草 (игровая комбинация)"
-cost = {}
+cost = {
+"cao": 3
+}
 out_scene = ExtResource("4_n2n0h")
 metadata/_custom_type_script = "uid://mykjftg0dap7"
 
