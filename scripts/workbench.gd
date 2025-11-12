@@ -6,13 +6,32 @@ func _ready():
 	if not use_zone: use_zone = $UseZone
 
 func _input(event):
-	if event.is_action_pressed("interact") and _player_in_zone():
-		_try_craft()
+	if event.is_action_pressed("interact"):
+		print("E pressed; in_zone =", _player_in_zone())
+		if _player_in_zone():
+			_try_craft()
+
 
 func _player_in_zone() -> bool:
-	for b in use_zone.get_overlapping_bodies():
-		if b is Camera3D: return true
-	return false
+	if use_zone == null:
+		return false
+
+	# берём активную камеру (твою DesktopCamera)
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		return false
+
+	# оценим "радиус" зоны по её CollisionShape3D
+	var r := 1.2
+	var shape_node := use_zone.get_node_or_null("CollisionShape3D")
+	if shape_node and shape_node.shape is BoxShape3D:
+		var s: Vector3 = shape_node.shape.size
+		r = max(s.x, s.z) * 0.5
+	elif shape_node and shape_node.shape is SphereShape3D:
+		r = shape_node.shape.radius
+
+	return cam.global_position.distance_to(use_zone.global_position) <= r
+
 
 func _try_craft():
 	# ищем первый доступный рецепт

@@ -19,6 +19,7 @@ metadata/_custom_type_script = "uid://mykjftg0dap7"
 size = Vector3(0.271851, 0.251709, 0.167847)
 
 [node name="Workbench" node_paths=PackedStringArray("use_zone") instance=ExtResource("1_1cdeh")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0)
 script = ExtResource("2_p3ame")
 use_zone = NodePath("UseZone")
 recipes = Array[ExtResource("3_cc3pl")]([SubResource("Resource_a0vkv")])

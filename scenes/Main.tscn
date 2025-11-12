@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci1xcucj7ei3j"]
+[gd_scene load_steps=8 format=3 uid="uid://ci1xcucj7ei3j"]
 
 [ext_resource type="PackedScene" uid="uid://cfp8t1jsjlygj" path="res://scenes/Grass.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://dv7e1w5a3kfwy" path="res://scripts/grass_spawner.gd" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://byrmt0bk0rb26" path="res://scripts/desktop_camera.gd" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://uklknt6m0puo" path="res://scenes/Workbench.tscn" id="4_rarhs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0bbpv"]
 
@@ -41,3 +42,9 @@ shape = SubResource("BoxShape3D_rarhs")
 transform = Transform3D(100, 0, 0, 0, 0.5, 0, 0, 0, 100, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_0bbpv")
 skeleton = NodePath("../..")
+
+[node name="Workbench" parent="." instance=ExtResource("4_rarhs")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, -3.10939)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.206494, 0.978448, 0, -0.978448, 0.206494, 0, 16.0288, 0)
