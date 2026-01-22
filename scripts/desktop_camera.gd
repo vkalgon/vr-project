@@ -34,6 +34,7 @@ var footstep_interval: float = 0.5  # Интервал между шагами (
 var is_moving: bool = false
 
 func _ready():
+	add_to_group("player")  # Добавляем в группу для поиска скриптом подсветки
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# Устанавливаем начальную высоту
 	_update_height()
@@ -227,6 +228,11 @@ func _collect_nearest():
 		# Воспроизводим звук подбора
 		if AudioManager:
 			AudioManager.play_pickup()
+		
+		# Показываем радикал в центре экрана
+		var hud = get_tree().get_first_node_in_group("game_hud")
+		if hud and hud.has_method("show_radical"):
+			hud.show_radical(id)
 		
 		nearest.queue_free()
 		print("Picked:", id, " local_inv:", local_inv, " GameState.inv:", GameState.inv if GameState else "N/A")

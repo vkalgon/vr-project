@@ -9,7 +9,7 @@ var nature_scene: PackedScene = null
 @export var y_position: float = 0.0  # Высота размещения объектов
 
 # Количество объектов каждого типа (увеличено для заполнения большой карты)
-@export var tree_count: int = 150
+@export var tree_count: int = 0  # Отключено, деревья теперь спавнятся через TreeSpawner
 @export var rock_count: int = 200
 @export var mushroom_count: int = 250
 @export var grass_patch_count: int = 1000
@@ -53,6 +53,8 @@ func _ready():
 		push_warning("Failed to load nature scene from: " + scene_path)
 		return
 	_spawn_nature_objects()
+	# Обрабатываем уже существующие объекты на сцене
+	_make_existing_objects_pickable()
 
 func _find_workbench_position():
 	# Ищем верстак в сцене
@@ -318,6 +320,11 @@ func _place_from_collection(source_meshes: Array[MeshInstance3D], container: Nod
 		_add_nature_object_script(new_mesh)
 		
 		container.add_child(new_mesh)
+		
+		# Делаем объект подбираемым, если это дерево или трава
+		if container.name == "Trees" or container.name == "GrassPatches":
+			_make_pickable(new_mesh, container.name)
+		
 		placed_positions.append(position)
 		placed_in_grid += 1
 	
@@ -345,6 +352,11 @@ func _place_from_collection(source_meshes: Array[MeshInstance3D], container: Nod
 		_add_nature_object_script(new_mesh)
 		
 		container.add_child(new_mesh)
+		
+		# Делаем объект подбираемым, если это дерево или трава
+		if container.name == "Trees" or container.name == "GrassPatches":
+			_make_pickable(new_mesh, container.name)
+		
 		placed_positions.append(position)
 
 
@@ -395,3 +407,193 @@ func _get_saved_object_type(object_name: String):
 	# Получаем сохраненный тип объекта
 	return saved_object_types.get(object_name, null)
 
+# Делает объект подбираемым, оборачивая его в RigidBody3D если нужно
+func _make_pickable(mesh_instance: MeshInstance3D, container_name: String):
+	if mesh_instance == null:
+		return
+	
+	# Определяем тип объекта и item_id
+	var item_id: String = ""
+	var script_path: String = ""
+	
+	if container_name == "Trees":
+		item_id = "mu"
+		script_path = "res://scripts/tree.gd"
+	elif container_name == "GrassPatches":
+		item_id = "cao"
+		script_path = "res://scripts/grass.gd"
+	else:
+		return
+	
+	# Проверяем, не является ли уже родитель RigidBody3D
+	var parent = mesh_instance.get_parent()
+	if parent is RigidBody3D:
+		# Если уже в RigidBody3D, просто добавляем скрипт
+		var rigid_body = parent as RigidBody3D
+		if rigid_body.get_script() == null:
+			var script = load(script_path)
+			if script:
+				rigid_body.set_script(script)
+				# Устанавливаем item_id после установки скрипта
+				rigid_body.item_id = item_id
+		return
+	
+	# Создаем RigidBody3D
+	var rigid_body = RigidBody3D.new()
+	rigid_body.name = mesh_instance.name + "_RigidBody"
+	rigid_body.position = mesh_instance.position
+	rigid_body.rotation = mesh_instance.rotation
+	rigid_body.scale = mesh_instance.scale
+	# Устанавливаем collision_layer для взаимодействия
+	rigid_body.collision_layer = 1  # Слой 1 для физических объектов
+	rigid_body.collision_mask = 1   # Маска для взаимодействия с другими объектами
+	
+	# Переносим MeshInstance3D в RigidBody3D
+	parent = mesh_instance.get_parent()
+	if parent:
+		parent.remove_child(mesh_instance)
+	
+	rigid_body.add_child(mesh_instance)
+	mesh_instance.position = Vector3.ZERO
+	mesh_instance.rotation = Vector3.ZERO
+	mesh_instance.scale = Vector3.ONE
+	
+	# Добавляем скрипт
+	var script = load(script_path)
+	if script:
+		rigid_body.set_script(script)
+		# Устанавливаем item_id после установки скрипта
+		rigid_body.item_id = item_id
+	
+	# Создаем коллизию для RigidBody3D
+	_create_collision_for_rigid_body(rigid_body, mesh_instance)
+	
+	# Добавляем RigidBody3D в контейнер
+	if parent:
+		parent.add_child(rigid_body)
+		rigid_body.owner = parent
+
+# Обрабатывает уже существующие объекты на сцене, делая их подбираемыми
+func _make_existing_objects_pickable():
+	# Ищем контейнеры Trees и GrassPatches в разных местах
+	var trees_container = get_node_or_null("Trees")
+	var grass_container = get_node_or_null("GrassPatches")
+	
+	# Если не найдены как дочерние узлы, ищем в корне сцены
+	if not trees_container:
+		var scene_root = get_tree().current_scene
+		if scene_root:
+			trees_container = scene_root.get_node_or_null("Trees")
+	
+	if not grass_container:
+		var scene_root = get_tree().current_scene
+		if scene_root:
+			grass_container = scene_root.get_node_or_null("GrassPatches")
+	
+	# Обрабатываем деревья
+	if trees_container:
+		for child in trees_container.get_children():
+			if child is MeshInstance3D:
+				_make_pickable(child as MeshInstance3D, "Trees")
+			elif child is RigidBody3D:
+				# Если уже RigidBody3D, просто добавляем скрипт
+				var rigid_body = child as RigidBody3D
+				if rigid_body.get_script() == null:
+					var script = load("res://scripts/tree.gd")
+					if script:
+						rigid_body.set_script(script)
+						rigid_body.item_id = "mu"
+				# Убеждаемся, что есть коллизия
+				var mesh_instance = _find_mesh_instance_in_rigid_body(rigid_body)
+				if mesh_instance:
+					_create_collision_for_rigid_body(rigid_body, mesh_instance)
+			# Также проверяем вложенные узлы (на случай, если структура сложнее)
+			_process_children_for_pickup(child, "Trees")
+	
+	# Обрабатываем траву
+	if grass_container:
+		for child in grass_container.get_children():
+			if child is MeshInstance3D:
+				_make_pickable(child as MeshInstance3D, "GrassPatches")
+			elif child is RigidBody3D:
+				# Если уже RigidBody3D, просто добавляем скрипт
+				var rigid_body = child as RigidBody3D
+				if rigid_body.get_script() == null:
+					var script = load("res://scripts/grass.gd")
+					if script:
+						rigid_body.set_script(script)
+						rigid_body.item_id = "cao"
+				# Убеждаемся, что есть коллизия
+				var mesh_instance = _find_mesh_instance_in_rigid_body(rigid_body)
+				if mesh_instance:
+					_create_collision_for_rigid_body(rigid_body, mesh_instance)
+			# Также проверяем вложенные узлы
+			_process_children_for_pickup(child, "GrassPatches")
+
+# Рекурсивно обрабатывает дочерние узлы для подбора
+func _process_children_for_pickup(node: Node, container_name: String):
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			_make_pickable(child as MeshInstance3D, container_name)
+		elif child is RigidBody3D:
+			var rigid_body = child as RigidBody3D
+			if rigid_body.get_script() == null:
+				var script_path = "res://scripts/tree.gd" if container_name == "Trees" else "res://scripts/grass.gd"
+				var item_id = "mu" if container_name == "Trees" else "cao"
+				var script = load(script_path)
+				if script:
+					rigid_body.set_script(script)
+					rigid_body.item_id = item_id
+		# Рекурсивно обрабатываем вложенные узлы
+		_process_children_for_pickup(child, container_name)
+
+# Создает коллизию для RigidBody3D на основе MeshInstance3D
+func _create_collision_for_rigid_body(rigid_body: RigidBody3D, mesh_instance: MeshInstance3D):
+	if rigid_body == null or mesh_instance == null:
+		return
+	
+	# Проверяем, есть ли уже CollisionShape3D
+	for child in rigid_body.get_children():
+		if child is CollisionShape3D:
+			return
+	
+	# Получаем AABB меша
+	var aabb = mesh_instance.get_aabb()
+	if aabb.size == Vector3.ZERO:
+		# Если AABB пустой, создаем простую коллизию
+		aabb = AABB(Vector3(-0.5, 0, -0.5), Vector3(1, 1, 1))
+	
+	# Создаем CollisionShape3D с BoxShape3D
+	var collision_shape = CollisionShape3D.new()
+	collision_shape.name = "CollisionShape3D"
+	
+	# Создаем BoxShape3D на основе AABB
+	var box_shape = BoxShape3D.new()
+	box_shape.size = aabb.size
+	collision_shape.shape = box_shape
+	
+	# Позиционируем коллизию относительно центра меша
+	collision_shape.position = aabb.get_center()
+	
+	rigid_body.add_child(collision_shape)
+	collision_shape.owner = rigid_body
+
+# Находит MeshInstance3D внутри RigidBody3D
+func _find_mesh_instance_in_rigid_body(rigid_body: RigidBody3D) -> MeshInstance3D:
+	for child in rigid_body.get_children():
+		if child is MeshInstance3D:
+			return child as MeshInstance3D
+		var result = _find_mesh_instance_in_node(child)
+		if result:
+			return result
+	return null
+
+# Рекурсивно ищет MeshInstance3D в узле
+func _find_mesh_instance_in_node(node: Node) -> MeshInstance3D:
+	if node is MeshInstance3D:
+		return node as MeshInstance3D
+	for child in node.get_children():
+		var result = _find_mesh_instance_in_node(child)
+		if result:
+			return result
+	return null

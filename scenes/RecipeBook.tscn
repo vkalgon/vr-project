@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://cio047tb70au8"]
+
+[ext_resource type="Script" uid="uid://5q5k8mcbet43" path="res://scripts/recipe_book.gd" id="1_recipe_book"]
+[ext_resource type="Texture2D" uid="uid://dddl0l75ehf0l" path="res://assets/Complete_UI_Book_Styles_Pack_Free_v1.0/01_TravelBookLite/Sprites/UI_TravelBook_BookPageLeft01a.png" id="2_book_page_l"]
+[ext_resource type="Texture2D" uid="uid://c1ud1lv8y4nvc" path="res://assets/Complete_UI_Book_Styles_Pack_Free_v1.0/01_TravelBookLite/Sprites/UI_TravelBook_BookPageRight01a.png" id="3_book_page_r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1"]
+texture = ExtResource("2_book_page_l")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2"]
+texture = ExtResource("3_book_page_r")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[node name="RecipeBook" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_recipe_book")
+
+[node name="BookPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -400.0
+offset_right = 500.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1")
+
+[node name="BookContent" type="VBoxContainer" parent="BookPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = 40.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = -40.0
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="BookPanel/BookContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Книга рецептов"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="BookPanel/BookContent"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BookPanel/BookContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipesContainer" type="VBoxContainer" parent="BookPanel/BookContent/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 560.0
+offset_top = -50.0
+offset_right = 600.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "✕"

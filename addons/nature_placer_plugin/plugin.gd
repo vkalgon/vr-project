@@ -211,11 +211,11 @@ func _place_objects(main_scene: Node, map_size: Vector2, min_distance: float, mi
 		
 		# Размещаем объекты
 		var base_scale = scales[container_name]
-		_place_from_collection(type_scenes[type], container, count, map_size, min_distance, min_distance_from_workbench, workbench_position, base_scale, placed_positions, main_scene)
+		_place_from_collection(type_scenes[type], container, count, map_size, min_distance, min_distance_from_workbench, workbench_position, base_scale, placed_positions, main_scene, type)
 	
 	print("Placed objects on the map!")
 
-func _place_from_collection(scene_paths: Array, container: Node3D, count: int, map_size: Vector2, min_distance: float, min_distance_from_workbench: float, workbench_position: Vector3, base_scale: Vector3, placed_positions: Array, main_scene: Node):
+func _place_from_collection(scene_paths: Array, container: Node3D, count: int, map_size: Vector2, min_distance: float, min_distance_from_workbench: float, workbench_position: Vector3, base_scale: Vector3, placed_positions: Array, main_scene: Node, object_type: int):
 	# Используем сетку для равномерного распределения
 	var grid_size = ceil(sqrt(count * 2))
 	var cell_size_x = map_size.x / grid_size
@@ -337,4 +337,114 @@ func _place_from_collection(scene_paths: Array, container: Node3D, count: int, m
 			var instance = instances_to_add[j]
 			container.add_child(instance, true)
 			instance.set_owner(main_scene)
+			# Делаем объект подбираемым, если это дерево или трава
+			_make_pickable(instance, type)
+
+# Делает объект подбираемым, оборачивая его в RigidBody3D если нужно
+func _make_pickable(instance: Node, object_type: int):
+	# Только деревья (type 0) и трава (type 3) делаем подбираемыми
+	if object_type != 0 and object_type != 3:
+		return
+	
+	# Проверяем, является ли корневой узел уже RigidBody3D
+	if instance is RigidBody3D:
+		# Если уже RigidBody3D, просто добавляем скрипт
+		if instance.get_script() == null:
+			if object_type == 0:  # Дерево
+				var tree_script = load("res://scripts/tree.gd")
+				if tree_script:
+					instance.set_script(tree_script)
+			elif object_type == 3:  # Трава
+				var grass_script = load("res://scripts/grass.gd")
+				if grass_script:
+					instance.set_script(grass_script)
+		return
+	
+	# Если корневой узел не RigidBody3D, ищем первый MeshInstance3D в дереве
+	var mesh_instance = _find_mesh_instance(instance)
+	if mesh_instance == null:
+		return
+	
+	var parent = instance
+	var mesh_parent = mesh_instance.get_parent()
+	
+	# Создаем RigidBody3D
+	var rigid_body = RigidBody3D.new()
+	rigid_body.name = instance.name + "_RigidBody"
+	rigid_body.position = instance.position
+	rigid_body.rotation = instance.rotation
+	rigid_body.scale = instance.scale
+	# Устанавливаем collision_layer для взаимодействия
+	rigid_body.collision_layer = 1  # Слой 1 для физических объектов
+	rigid_body.collision_mask = 1   # Маска для взаимодействия с другими объектами
+	
+	# Переносим все дочерние узлы instance в RigidBody3D
+	var children_to_move = []
+	for child in instance.get_children():
+		children_to_move.append(child)
+	
+	for child in children_to_move:
+		instance.remove_child(child)
+		rigid_body.add_child(child)
+		child.owner = rigid_body
+	
+	# Заменяем instance на rigid_body в родителе
+	if parent != null:
+		parent.remove_child(instance)
+		parent.add_child(rigid_body)
+		rigid_body.owner = parent
+	
+	# Добавляем скрипт
+	if object_type == 0:  # Дерево
+		var tree_script = load("res://scripts/tree.gd")
+		if tree_script:
+			rigid_body.set_script(tree_script)
+	elif object_type == 3:  # Трава
+		var grass_script = load("res://scripts/grass.gd")
+		if grass_script:
+			rigid_body.set_script(grass_script)
+	
+	# Создаем коллизию для RigidBody3D
+	_create_collision_for_rigid_body(rigid_body, mesh_instance)
+
+# Находит первый MeshInstance3D в дереве узлов
+func _find_mesh_instance(node: Node) -> MeshInstance3D:
+	if node is MeshInstance3D:
+		return node as MeshInstance3D
+	for child in node.get_children():
+		var result = _find_mesh_instance(child)
+		if result:
+			return result
+	return null
+
+# Создает коллизию для RigidBody3D на основе MeshInstance3D
+func _create_collision_for_rigid_body(rigid_body: RigidBody3D, mesh_instance: MeshInstance3D):
+	if rigid_body == null or mesh_instance == null:
+		return
+	
+	# Проверяем, есть ли уже CollisionShape3D
+	for child in rigid_body.get_children():
+		if child is CollisionShape3D:
+			return
+	
+	# Получаем AABB меша
+	var aabb = mesh_instance.get_aabb()
+	if aabb.size == Vector3.ZERO:
+		# Если AABB пустой, создаем простую коллизию
+		aabb = AABB(Vector3(-0.5, 0, -0.5), Vector3(1, 1, 1))
+	
+	# Создаем CollisionShape3D с BoxShape3D
+	var collision_shape = CollisionShape3D.new()
+	collision_shape.name = "CollisionShape3D"
+	
+	# Создаем BoxShape3D на основе AABB
+	var box_shape = BoxShape3D.new()
+	box_shape.size = aabb.size
+	collision_shape.shape = box_shape
+	
+	# Позиционируем коллизию относительно центра меша
+	collision_shape.position = aabb.get_center()
+	
+	rigid_body.add_child(collision_shape)
+	collision_shape.owner = rigid_body
 

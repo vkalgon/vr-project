@@ -44,6 +44,9 @@ func _ready():
 			if wind_controller.has_method("get_wind_speed"):
 				wind_speed = wind_controller.get_wind_speed()
 				_update_animation_speed()
+	
+	# Добавляем подсветку при приближении
+	_add_highlight()
 
 func _update_animation_speed():
 	# Обновляем скорость анимации на основе параметров ветра
@@ -64,3 +67,12 @@ func _find_animation_player(node: Node) -> AnimationPlayer:
 		if result:
 			return result
 	return null
+
+func _add_highlight():
+	# Добавляем узел с скриптом подсветки
+	var highlight_script = load("res://scripts/pickup_highlight.gd")
+	if highlight_script:
+		var highlight_node = Node.new()
+		highlight_node.set_script(highlight_script)
+		highlight_node.name = "PickupHighlight"
+		add_child(highlight_node)

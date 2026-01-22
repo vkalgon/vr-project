@@ -14,10 +14,8 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("interact"):
 		if _player_in_zone():
-			# Воспроизводим звук работы верстака
-			if AudioManager:
-				AudioManager.play_craft_work()
-			_try_craft()
+			# Открываем книгу рецептов вместо автоматического крафта
+			_open_recipe_book()
 
 func _on_body_entered(body: Node3D):
 	# Можно добавить визуальную индикацию, что игрок в зоне
@@ -170,3 +168,29 @@ func _show_message(text: String, is_success: bool):
 	else:
 		# Если HUD не найден, выводим в консоль
 		print(text)
+
+func _open_recipe_book():
+	# Ищем книгу рецептов в сцене
+	var recipe_book = get_tree().get_first_node_in_group("recipe_book")
+	if recipe_book == null:
+		# Пытаемся найти в HUD
+		var hud = get_tree().get_first_node_in_group("game_hud")
+		if hud:
+			recipe_book = hud.get_node_or_null("RecipeBook")
+	
+	# Если книга не найдена, создаем её
+	if recipe_book == null:
+		var recipe_book_scene = load("res://scenes/RecipeBook.tscn")
+		if recipe_book_scene:
+			recipe_book = recipe_book_scene.instantiate()
+			recipe_book.add_to_group("recipe_book")
+			# Добавляем в корень сцены или в HUD
+			var hud = get_tree().get_first_node_in_group("game_hud")
+			if hud:
+				hud.add_child(recipe_book)
+			else:
+				get_tree().current_scene.add_child(recipe_book)
+	
+	# Открываем книгу
+	if recipe_book and recipe_book.has_method("open_book"):
+		recipe_book.open_book(self)

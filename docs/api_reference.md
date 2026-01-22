@@ -400,3 +400,8 @@ instance.global_position = spawn_position
 - `PROJECTION_PERSPECTIVE` - перспективная
 - `PROJECTION_ORTHOGONAL` - ортогональная
 
+
+
+
+
+
