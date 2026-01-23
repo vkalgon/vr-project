@@ -155,16 +155,17 @@ func _spawn_pigs():
 		else:
 			pig_rigid_body.position = Vector3(position.x, position.y + y_offset, position.z)
 		
-		# Поворачиваем на 180 градусов, если модель изначально смотрит назад
-		pig_rigid_body.rotation = Vector3(0, randf_range(0.0, TAU) + PI, 0)
+		# Случайный поворот по Y для разнообразия (ориентацию модели исправим позже на дочернем узле)
+		pig_rigid_body.rotation = Vector3(0, randf_range(0.0, TAU), 0)
 		
 		# Устанавливаем масштаб (если модель слишком маленькая, можно увеличить)
 		pig_rigid_body.scale = Vector3(pig_scale, pig_scale, pig_scale)
 		
 		# Убеждаемся, что объект видим
 		pig_rigid_body.visible = true
-		pig_rigid_body.collision_layer = 1
-		pig_rigid_body.collision_mask = 1
+		# Устанавливаем collision_layer и collision_mask (как в nature_spawner.gd для травы)
+		pig_rigid_body.collision_layer = 1  # Слой 1 для физических объектов
+		pig_rigid_body.collision_mask = 1   # Маска для взаимодействия
 		
 		# Если нашли отдельный узел свиньи, клонируем его
 		if pig_node != pig_scene_instance:
@@ -210,16 +211,17 @@ func _spawn_pigs():
 		# Добавляем скрипт для подбора
 		var pig_script = load("res://scripts/pig.gd")
 		if pig_script:
-			pig_rigid_body.set_script(pig_script)
-			# Устанавливаем item_id (скрипт уже установлен, свойство доступно)
-			pig_rigid_body.item_id = "zhu"
-			# Также устанавливаем как метаданные для доступа через get_meta()
+			# Устанавливаем item_id ПЕРЕД установкой скрипта
 			pig_rigid_body.set_meta("item_id", "zhu")
+			# Устанавливаем скрипт
+			pig_rigid_body.set_script(pig_script)
+			# Устанавливаем item_id через свойство (после установки скрипта)
+			pig_rigid_body.item_id = "zhu"
 			# ВАЖНО: Добавляем в группу pickup ДО добавления в сцену
 			# Это нужно, чтобы группа была доступна сразу
 			pig_rigid_body.add_to_group("pickup")
 			# Отладочный вывод
-			print("PigSpawner: Created pig with item_id=", pig_rigid_body.item_id, " in_group=", pig_rigid_body.is_in_group("pickup"))
+			print("PigSpawner: Created pig with item_id=", pig_rigid_body.item_id, " in_group=", pig_rigid_body.is_in_group("pickup"), " collision_layer=", pig_rigid_body.collision_layer)
 		
 		# Находим первый MeshInstance3D внутри модели и применяем скрипт nature_object
 		var mesh_instance = _find_mesh_instance(pig_rigid_body)
@@ -229,6 +231,54 @@ func _spawn_pigs():
 				mesh_instance.set_script(script)
 				mesh_instance.object_type = 4  # OTHER
 		
+		# Исправляем ориентацию модели: находим корневой дочерний узел модели и поворачиваем его
+		# Это нужно, если модель изначально смотрит мордой вниз
+		# ВАЖНО: Делаем это ДО создания коллизии, чтобы коллизия создавалась для уже повернутой модели
+		for child in pig_rigid_body.get_children():
+			if child is Node3D and child.name != "CollisionShape3D" and child.name != "PickupHighlight" and child.name != "PigAnimation":
+				# Применяем поворот по X на -90 градусов к корневому узлу модели
+				child.rotation.x = -PI/2
+				print("PigSpawner: Applied rotation to model root node: ", child.name)
+				break  # Применяем только к первому найденному узлу модели
+		
+		# ВАЖНО: Создаем коллизию ПОСЛЕ применения поворота, чтобы она соответствовала повернутой модели
+		if mesh_instance != null:
+			var has_collision = false
+			for child in pig_rigid_body.get_children():
+				if child is CollisionShape3D:
+					has_collision = true
+					break
+			
+			if not has_collision:
+				print("PigSpawner: Creating collision after rotation")
+				# Получаем AABB в глобальных координатах (уже с учетом поворота)
+				var aabb = mesh_instance.get_aabb()
+				if aabb.size != Vector3.ZERO:
+					# Преобразуем AABB в локальные координаты RigidBody3D
+					var mesh_global_center = mesh_instance.to_global(aabb.get_center())
+					var local_center = pig_rigid_body.to_local(mesh_global_center)
+					
+					var collision_shape = CollisionShape3D.new()
+					collision_shape.name = "CollisionShape3D"
+					var box_shape = BoxShape3D.new()
+					# Используем размер AABB
+					box_shape.size = aabb.size
+					collision_shape.shape = box_shape
+					# Позиционируем в локальных координатах RigidBody3D
+					collision_shape.position = local_center
+					pig_rigid_body.add_child(collision_shape)
+					print("PigSpawner: Created collision with size ", box_shape.size, " at local position ", collision_shape.position, " (global center was ", mesh_global_center, ")")
+				else:
+					# Если AABB пустой, создаем коллизию по умолчанию в центре
+					var collision_shape = CollisionShape3D.new()
+					collision_shape.name = "CollisionShape3D"
+					var box_shape = BoxShape3D.new()
+					box_shape.size = Vector3(2.0, 2.0, 2.0)
+					collision_shape.shape = box_shape
+					collision_shape.position = Vector3.ZERO  # В центре RigidBody3D
+					pig_rigid_body.add_child(collision_shape)
+					print("PigSpawner: Created default collision with size ", box_shape.size, " at center")
+		
 		# Освобождаем память от исходной сцены
 		pig_scene_instance.queue_free()
 		
@@ -236,7 +286,32 @@ func _spawn_pigs():
 		other_container.add_child(pig_rigid_body)
 		
 		# После добавления в сцену _ready() будет вызван автоматически
-		# Но мы уже добавили в группу выше, так что это должно работать
+		# Проверяем, что все правильно настроено после добавления
+		await get_tree().process_frame  # Ждем один кадр, чтобы _ready() выполнился
+		
+		# Проверяем финальное состояние
+		print("PigSpawner: After spawn - pig in_group=", pig_rigid_body.is_in_group("pickup"), " has_meta=", pig_rigid_body.has_meta("item_id"), " collision_layer=", pig_rigid_body.collision_layer, " collision_mask=", pig_rigid_body.collision_mask)
+		
+		# Проверяем наличие коллизии
+		var has_collision = false
+		var collision_count = 0
+		for child in pig_rigid_body.get_children():
+			if child is CollisionShape3D:
+				has_collision = true
+				collision_count += 1
+				var shape = child.shape
+				if shape:
+					print("PigSpawner: CollisionShape3D found: ", child.name, " shape=", shape.get_class(), " size=", shape.size if shape.has("size") else "N/A")
+				else:
+					print("PigSpawner: CollisionShape3D found but shape is null!")
+		if not has_collision:
+			print("PigSpawner: WARNING - No CollisionShape3D found on pig!")
+		else:
+			print("PigSpawner: Found ", collision_count, " CollisionShape3D nodes")
+		
+		# Проверяем, что свинья видна и активна
+		print("PigSpawner: Pig visible=", pig_rigid_body.visible, " freeze=", pig_rigid_body.freeze, " global_position=", pig_rigid_body.global_position)
+		
 		spawned_count += 1
 		
 		placed_positions.append(position)

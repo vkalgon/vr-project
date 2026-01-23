@@ -484,16 +484,18 @@ func _update_recipes_display():
 	if available_recipes.size() > 0:
 		var available_header = Label.new()
 		available_header.text = "🎯 Доступные рецепты (%d)" % available_recipes.size()
-		available_header.add_theme_font_size_override("font_size", 20)
-		available_header.add_theme_color_override("font_color", Color(0.1, 0.6, 0.1))
+		available_header.add_theme_font_size_override("font_size", 22)  # Увеличенный размер
+		available_header.add_theme_color_override("font_color", Color(0.0, 0.7, 0.0))  # Более яркий зеленый
 		available_header.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		available_header.add_theme_constant_override("outline_size", 4)  # Обводка для читаемости
+		available_header.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0.8))
 		recipes_container.add_child(available_header)
 		
 		# Создаем GridContainer для доступных рецептов
 		var available_grid = GridContainer.new()
-		available_grid.columns = 2
-		available_grid.add_theme_constant_override("h_separation", 15)
-		available_grid.add_theme_constant_override("v_separation", 15)
+		available_grid.columns = 1  # Один столбец для лучшей читаемости
+		available_grid.add_theme_constant_override("h_separation", 20)
+		available_grid.add_theme_constant_override("v_separation", 20)  # Увеличенные отступы
 		recipes_container.add_child(available_grid)
 		
 		for recipe in available_recipes:
@@ -505,16 +507,18 @@ func _update_recipes_display():
 	if locked_recipes.size() > 0:
 		var locked_header = Label.new()
 		locked_header.text = "🔒 Заблокированные рецепты (%d)" % locked_recipes.size()
-		locked_header.add_theme_font_size_override("font_size", 20)
-		locked_header.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
+		locked_header.add_theme_font_size_override("font_size", 22)  # Увеличенный размер
+		locked_header.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
 		locked_header.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		locked_header.add_theme_constant_override("outline_size", 4)  # Обводка для читаемости
+		locked_header.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0.8))
 		recipes_container.add_child(locked_header)
 		
 		# Создаем GridContainer для заблокированных рецептов
 		var locked_grid = GridContainer.new()
-		locked_grid.columns = 2
-		locked_grid.add_theme_constant_override("h_separation", 15)
-		locked_grid.add_theme_constant_override("v_separation", 15)
+		locked_grid.columns = 1  # Один столбец для лучшей читаемости
+		locked_grid.add_theme_constant_override("h_separation", 20)
+		locked_grid.add_theme_constant_override("v_separation", 20)  # Увеличенные отступы
 		recipes_container.add_child(locked_grid)
 		
 		for recipe in locked_recipes:
@@ -533,7 +537,7 @@ func _update_recipes_display():
 func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 	# Создаем контейнер для рецепта с использованием ассетов книги
 	var recipe_panel = Panel.new()
-	recipe_panel.custom_minimum_size = Vector2(350, 180)  # Размер для сетки
+	recipe_panel.custom_minimum_size = Vector2(420, 220)  # Увеличенный размер для лучшей читаемости
 	
 	# Стиль панели в зависимости от блокировки
 	var panel_style = StyleBoxFlat.new()
@@ -602,16 +606,16 @@ func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 	
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-	vbox.offset_left = 12
-	vbox.offset_top = 12
-	vbox.offset_right = -12
-	vbox.offset_bottom = -12
-	vbox.add_theme_constant_override("separation", 8)
+	vbox.offset_left = 16
+	vbox.offset_top = 16
+	vbox.offset_right = -16
+	vbox.offset_bottom = -16
+	vbox.add_theme_constant_override("separation", 12)  # Увеличенные отступы
 	recipe_panel.add_child(vbox)
 	
 	# Контейнер для формулы крафта (ингредиент1 + ингредиент2 = результат)
 	var formula_container = HBoxContainer.new()
-	formula_container.add_theme_constant_override("separation", 15)
+	formula_container.add_theme_constant_override("separation", 20)  # Увеличенное расстояние между элементами
 	formula_container.alignment = BoxContainer.ALIGNMENT_CENTER
 	formula_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	vbox.add_child(formula_container)
@@ -635,11 +639,11 @@ func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 		if i < ingredient_keys.size() - 1:
 			var plus_label = Label.new()
 			plus_label.text = "+"
-			plus_label.add_theme_font_size_override("font_size", 24)
-			plus_label.add_theme_color_override("font_color", Color(0.6, 0.4, 0.2))
+			plus_label.add_theme_font_size_override("font_size", 28)  # Увеличенный размер
+			plus_label.add_theme_color_override("font_color", Color(0.7, 0.5, 0.3))  # Более контрастный цвет
 			plus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			plus_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-			plus_label.custom_minimum_size = Vector2(30, 30)
+			plus_label.custom_minimum_size = Vector2(35, 35)
 			formula_container.add_child(plus_label)
 		
 		if available < required:
@@ -652,11 +656,11 @@ func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 	if not recipe.cost.is_empty():
 		var equals_label = Label.new()
 		equals_label.text = "="
-		equals_label.add_theme_font_size_override("font_size", 24)
-		equals_label.add_theme_color_override("font_color", Color(0.6, 0.4, 0.2))
+		equals_label.add_theme_font_size_override("font_size", 28)  # Увеличенный размер
+		equals_label.add_theme_color_override("font_color", Color(0.7, 0.5, 0.3))  # Более контрастный цвет
 		equals_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		equals_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		equals_label.custom_minimum_size = Vector2(30, 30)
+		equals_label.custom_minimum_size = Vector2(35, 35)
 		formula_container.add_child(equals_label)
 		
 		# Показываем результат только если все ингредиенты собраны и открыты
@@ -676,24 +680,25 @@ func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 		var result_name_label = Label.new()
 		result_name_label.text = recipe.name
 		result_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		result_name_label.add_theme_font_size_override("font_size", 12)
-		result_name_label.add_theme_color_override("font_color", Color(0.6, 0.4, 0.2))
+		result_name_label.add_theme_font_size_override("font_size", 14)  # Увеличенный размер
+		result_name_label.add_theme_color_override("font_color", Color(0.5, 0.3, 0.1))  # Более темный цвет для лучшей читаемости
 		vbox.add_child(result_name_label)
 	
 	# Кнопка крафта (только если не заблокирован и все ингредиенты собраны)
 	if not is_locked and can_craft and not recipe.cost.is_empty():
 		var craft_button = _create_animated_button("✨ Скрафтить", _on_craft_button_pressed.bind(recipe))
-		craft_button.custom_minimum_size = Vector2(120, 32)
-		craft_button.add_theme_font_size_override("font_size", 13)
+		craft_button.custom_minimum_size = Vector2(160, 40)  # Увеличенная кнопка
+		craft_button.add_theme_font_size_override("font_size", 16)  # Увеличенный шрифт
+		craft_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER  # Центрируем кнопку
 		vbox.add_child(craft_button)
 	elif not is_locked:
 		var status_label = Label.new()
 		if recipe.cost.is_empty():
 			status_label.text = "Рецепт не требует ингредиентов"
 		else:
-			status_label.text = "Недостаточно ингредиентов"
-		status_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
-		status_label.add_theme_font_size_override("font_size", 11)
+			status_label.text = "❌ Недостаточно ингредиентов"  # Добавили иконку
+		status_label.add_theme_color_override("font_color", Color(0.7, 0.3, 0.3))  # Красноватый цвет для предупреждения
+		status_label.add_theme_font_size_override("font_size", 13)  # Увеличенный размер
 		status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		vbox.add_child(status_label)
 	
@@ -701,13 +706,13 @@ func _create_recipe_item(recipe: Recipe, is_locked: bool = false) -> Control:
 
 func _create_ingredient_item(item_id: String, required: int, available: int, is_discovered: bool) -> Control:
 	var container = VBoxContainer.new()
-	container.custom_minimum_size = Vector2(60, 85)
+	container.custom_minimum_size = Vector2(75, 100)  # Увеличенный размер
 	container.alignment = BoxContainer.ALIGNMENT_CENTER
-	container.add_theme_constant_override("separation", 4)
+	container.add_theme_constant_override("separation", 6)  # Увеличенные отступы
 	
 	# Используем слот из ассетов для фона
 	var slot_panel = Panel.new()
-	slot_panel.custom_minimum_size = Vector2(55, 55)
+	slot_panel.custom_minimum_size = Vector2(65, 65)  # Увеличенный размер слота
 	
 	var slot_texture = load("res://assets/Complete_UI_Book_Styles_Pack_Free_v1.0/01_TravelBookLite/Sprites/UI_TravelBook_Slot01a.png")
 	if slot_texture:
@@ -725,7 +730,7 @@ func _create_ingredient_item(item_id: String, required: int, available: int, is_
 	var icon_label = Label.new()
 	icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	icon_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	icon_label.custom_minimum_size = Vector2(50, 50)
+	icon_label.custom_minimum_size = Vector2(60, 60)  # Увеличенный размер иконки
 	slot_panel.add_child(icon_label)
 	
 	if is_discovered:
@@ -740,29 +745,65 @@ func _create_ingredient_item(item_id: String, required: int, available: int, is_
 			var font_file = load(font_path) as FontFile
 			if font_file:
 				icon_label.add_theme_font_override("font", font_file)
-			icon_label.add_theme_font_size_override("font_size", 28)
+			icon_label.add_theme_font_size_override("font_size", 32)  # Увеличенный размер иероглифа
 		else:
 			icon_label.text = item_id
 			icon_label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1))
+			icon_label.add_theme_font_size_override("font_size", 14)
 	else:
 		# Показываем знак вопроса
 		icon_label.text = "?"
-		icon_label.add_theme_font_size_override("font_size", 28)
-		icon_label.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
+		icon_label.add_theme_font_size_override("font_size", 32)  # Увеличенный размер
+		icon_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))  # Более заметный серый
+		slot_panel.modulate = Color(0.8, 0.8, 0.8, 0.6)  # Затемняем слот для неоткрытых
 	
 	# Количество
 	var count_label = Label.new()
 	count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	count_label.add_theme_font_size_override("font_size", 11)
+	count_label.add_theme_font_size_override("font_size", 13)  # Увеличенный размер
 	if is_discovered:
 		count_label.text = "%d/%d" % [available, required]
 		if available >= required:
-			count_label.add_theme_color_override("font_color", Color(0.1, 0.7, 0.1))  # Зеленый
+			count_label.add_theme_color_override("font_color", Color(0.0, 0.8, 0.0))  # Яркий зеленый
+			# Добавляем визуальную подсказку - зеленую рамку поверх слота
+			var success_frame = Panel.new()
+			success_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			success_frame.set_anchors_preset(Control.PRESET_FULL_RECT)
+			var success_style = StyleBoxFlat.new()
+			success_style.bg_color = Color(0.0, 0.8, 0.0, 0.0)  # Прозрачный фон
+			success_style.border_color = Color(0.0, 0.8, 0.0, 0.9)  # Зеленая рамка
+			success_style.border_width_left = 3
+			success_style.border_width_top = 3
+			success_style.border_width_right = 3
+			success_style.border_width_bottom = 3
+			success_style.corner_radius_top_left = 4
+			success_style.corner_radius_top_right = 4
+			success_style.corner_radius_bottom_left = 4
+			success_style.corner_radius_bottom_right = 4
+			success_frame.add_theme_stylebox_override("panel", success_style)
+			slot_panel.add_child(success_frame)
 		else:
-			count_label.add_theme_color_override("font_color", Color(0.8, 0.2, 0.2))  # Красный
+			count_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))  # Яркий красный
+			# Добавляем визуальную подсказку - красную рамку поверх слота
+			var warning_frame = Panel.new()
+			warning_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			warning_frame.set_anchors_preset(Control.PRESET_FULL_RECT)
+			var warning_style = StyleBoxFlat.new()
+			warning_style.bg_color = Color(0.9, 0.2, 0.2, 0.0)  # Прозрачный фон
+			warning_style.border_color = Color(0.9, 0.2, 0.2, 0.9)  # Красная рамка
+			warning_style.border_width_left = 3
+			warning_style.border_width_top = 3
+			warning_style.border_width_right = 3
+			warning_style.border_width_bottom = 3
+			warning_style.corner_radius_top_left = 4
+			warning_style.corner_radius_top_right = 4
+			warning_style.corner_radius_bottom_left = 4
+			warning_style.corner_radius_bottom_right = 4
+			warning_frame.add_theme_stylebox_override("panel", warning_style)
+			slot_panel.add_child(warning_frame)
 	else:
 		count_label.text = "?/?"
-		count_label.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
+		count_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
 	
 	container.add_child(count_label)
 	

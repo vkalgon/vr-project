@@ -43,6 +43,17 @@ func _ready():
 	# Запускаем фоновую музыку
 	if AudioManager:
 		AudioManager.play_background_music()
+	
+	# Проверяем настройки GrabZone
+	if zone != null:
+		print("DesktopCamera: GrabZone found, collision_mask=", zone.collision_mask)
+		# Убеждаемся, что GrabZone может обнаруживать объекты на слое 1
+		if zone.collision_mask & 1 == 0:
+			print("DesktopCamera: WARNING - GrabZone collision_mask doesn't include layer 1!")
+			zone.collision_mask |= 1  # Добавляем слой 1
+			print("DesktopCamera: Fixed GrabZone collision_mask to ", zone.collision_mask)
+	else:
+		print("DesktopCamera: WARNING - GrabZone not found!")
 
 func _input(event):
 	# Обрабатываем движение мыши только если мышь захвачена
@@ -191,20 +202,33 @@ func _collect_nearest():
 	
 	if zone != null:
 		var bodies := zone.get_overlapping_bodies()
+		print("DesktopCamera: Found ", bodies.size(), " bodies in GrabZone")
 		for b in bodies:
-			if b is RigidBody3D and b.is_in_group("pickup"):
-				var d := global_position.distance_to(b.global_position)
-				if d < best_distance and d <= interaction_range:
-					best_distance = d
-					nearest = b
+			if b is RigidBody3D:
+				var in_group = b.is_in_group("pickup")
+				var has_collision = false
+				for child in b.get_children():
+					if child is CollisionShape3D:
+						has_collision = true
+						break
+				print("DesktopCamera: Body ", b.name, " is RigidBody3D, in_group=", in_group, " collision_layer=", b.collision_layer, " has_collision=", has_collision, " item_id=", b.get_meta("item_id") if b.has_meta("item_id") else "N/A")
+				if in_group:
+					var d := global_position.distance_to(b.global_position)
+					print("DesktopCamera: Distance to ", b.name, " = ", d, " (max=", interaction_range, ")")
+					if d < best_distance and d <= interaction_range:
+						best_distance = d
+						nearest = b
+						print("DesktopCamera: New nearest = ", b.name)
 	
 	# Если raycast попал в объект, используем его
 	if result and result.collider is RigidBody3D:
 		var hit_body = result.collider as RigidBody3D
 		if hit_body.is_in_group("pickup"):
 			var d = global_position.distance_to(hit_body.global_position)
+			print("DesktopCamera: Raycast hit ", hit_body.name, " at distance ", d)
 			if d < best_distance:
 				nearest = hit_body
+				print("DesktopCamera: Raycast object is closer, using it")
 	
 	# Если нашли объект, подбираем его
 	if nearest:
