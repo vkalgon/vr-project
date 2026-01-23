@@ -1,4 +1,4 @@
-[gd_scene load_steps=432 format=4 uid="uid://ci1xcucj7ei3j"]
+[gd_scene load_steps=433 format=4 uid="uid://ci1xcucj7ei3j"]
 
 [ext_resource type="PackedScene" uid="uid://cfp8t1jsjlygj" path="res://scenes/Grass.tscn" id="1_elqb8"]
 [ext_resource type="Script" uid="uid://dv7e1w5a3kfwy" path="res://scripts/grass_spawner.gd" id="2_rvslj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://xhhpgf53m1fp" path="res://scripts/reference_objects.gd" id="9_ref"]
 [ext_resource type="Script" uid="uid://dod5im5s3dlx5" path="res://scripts/trees_container.gd" id="10_trees"]
 [ext_resource type="Script" uid="uid://bdnq6kvqjsni2" path="res://scripts/tree_spawner.gd" id="11_trees"]
+[ext_resource type="Script" uid="uid://qbymdlpupqdl" path="res://scripts/pig_spawner.gd" id="12_pigs"]
 [ext_resource type="PackedScene" uid="uid://dna7ftj5l638i" path="res://scenes/nature_objects/Tree4_1.tscn" id="15_siyqs"]
 [ext_resource type="PackedScene" uid="uid://b3wpt0rp7quek" path="res://scenes/nature_objects/Tree2_3.tscn" id="17_vshs7"]
 [ext_resource type="PackedScene" uid="uid://wpj3r8da1y2a" path="res://scenes/nature_objects/Tree6_2.tscn" id="18_2ki8c"]
@@ -5549,6 +5550,10 @@ script = ExtResource("7_wind")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0207934, 0.0293674, -0.0223093)
 script = ExtResource("8_nature")
 
+[node name="PigSpawner" type="Node3D" parent="."]
+script = ExtResource("12_pigs")
+count = 15
+
 [node name="ReferenceObjects" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80207, 0.620291, 0)
 script = ExtResource("9_ref")
@@ -6503,7 +6508,7 @@ transform = Transform3D(-98.0911, 19.4459, 8.50007e-07, 0, -4.37114e-06, 100, 19
 mesh = SubResource("ArrayMesh_loki1")
 
 [node name="Lantern1" parent="Decorations" instance=ExtResource("80_7figm")]
-transform = Transform3D(99.9629, 2.72415, 1.19076e-07, 0, -4.37114e-06, 100, 2.72415, -99.9629, -4.36952e-06, 45.832, 0, -30.3654)
+transform = Transform3D(99.9629, 2.72415, 1.19076e-07, 0, -4.37114e-06, 100, 2.72415, -99.9629, -4.36952e-06, -2.13818, 0, -5.1545)
 mesh = SubResource("ArrayMesh_vu0v8")
 
 [node name="Tile2" parent="Decorations" instance=ExtResource("81_r0h7t")]

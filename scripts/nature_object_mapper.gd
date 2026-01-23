@@ -60,6 +60,9 @@ static var object_type_map: Dictionary = {
 	
 	# Инструменты (Tools)
 	"Ax1_1": 8, "Ax1_2": 8,
+	
+	# Животные (Animals) - относим к OTHER
+	"Pig": 4,
 }
 
 # Получить тип объекта по его имени
@@ -94,6 +97,8 @@ static func get_object_type_by_name(object_name: String) -> int:
 		return 7  # EFFECT
 	elif "ax" in lower_name or "tool" in lower_name:
 		return 8  # TOOL
+	elif "pig" in lower_name:
+		return 4  # OTHER (животные)
 	
 	return 4  # OTHER
 

@@ -12,6 +12,7 @@ static var item_to_radical: Dictionary = {
 	"shui": "水", # Вода (water radical)
 	"huo": "火",  # Огонь (fire radical)
 	"tu": "土",   # Земля (earth radical)
+	"zhu": "豕",  # Свинья (pig radical)
 }
 
 # Получить радикал по item_id

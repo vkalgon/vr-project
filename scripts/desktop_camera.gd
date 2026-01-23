@@ -208,8 +208,19 @@ func _collect_nearest():
 	
 	# Если нашли объект, подбираем его
 	if nearest:
-		var id = nearest.get("item_id")
-		if id == null: id = "cao"
+		var id = null
+		# Пробуем разные способы получения item_id
+		if nearest.has_method("get") and nearest.get("item_id") != null:
+			id = nearest.get("item_id")
+		elif nearest.has_meta("item_id"):
+			id = nearest.get_meta("item_id")
+		elif "item_id" in nearest:
+			id = nearest.item_id
+		else:
+			id = "cao"
+		
+		# Отладочный вывод
+		print("DesktopCamera: Picking up item, id=", id, " object=", nearest.name, " in_group=", nearest.is_in_group("pickup"))
 		
 		# Сохраняем позицию для эффекта
 		var pickup_pos = nearest.global_position

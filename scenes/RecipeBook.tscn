@@ -58,17 +58,57 @@ theme_override_constants/separation = 20
 [node name="TitleLabel" type="Label" parent="BookPanel/BookContent"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Книга рецептов"
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+text = "书籍 рецептов иероглифов"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="BookPanel/BookContent"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BookPanel/BookContent"]
+[node name="TabButtons" type="HBoxContainer" parent="BookPanel/BookContent"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="InventoryTabButton" type="Button" parent="BookPanel/BookContent/TabButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "📦 Собранные радикалы"
+
+[node name="RecipesTabButton" type="Button" parent="BookPanel/BookContent/TabButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "✨ Рецепты"
+
+[node name="ContentContainer" type="Control" parent="BookPanel/BookContent"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RecipesContainer" type="VBoxContainer" parent="BookPanel/BookContent/ScrollContainer"]
+[node name="InventoryContent" type="ScrollContainer" parent="BookPanel/BookContent/ContentContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RadicalsGrid" type="GridContainer" parent="BookPanel/BookContent/ContentContainer/InventoryContent"]
+layout_mode = 2
+columns = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="RecipesContent" type="ScrollContainer" parent="BookPanel/BookContent/ContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecipesContainer" type="VBoxContainer" parent="BookPanel/BookContent/ContentContainer/RecipesContent"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
